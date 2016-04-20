@@ -1,0 +1,32 @@
+<div class="col-md-12">
+  <span><div class="col-md-6 line">
+    <div>MYSQL</div>
+    <table class="table table-bordered">
+      <caption>  </caption>
+      <thead>
+      <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Address</th>
+        <th>Order ID</th>
+        <th>Product ID</th>
+      </tr>
+      </thead>
+      <tbody  ng-repeat="result in q2.data">
+      <tr>
+        <td>{{result.userId}}</td>
+        <td>{{result.userName}}</td>
+        <td>{{result.address}}</td>
+        <td>{{result.orderId}}</td>
+        <td>{{result.productId}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div></span>
+  <span><div class="col-md-6">
+    <div>MONGO</div>
+    Query 2
+
+  </div></span>
+</div>

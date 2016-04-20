@@ -1,0 +1,31 @@
+<div class="col-md-12">
+  <span><div class="col-md-6 line">
+    <div>MYSQL</div>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>OrderId</th>
+        <th>User ID</th>
+      </tr>
+      </thead>
+      <tbody  ng-repeat="result in q3.data1">
+      <tr>
+        <td>{{result.productId}}</td>
+        <td>{{result.quantity}}</td>
+        <td>{{result.orderDate}}</td>
+        <td>{{result.userId}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+  </div></span>
+  <span><div class="col-md-6">
+    <div>MONGO</div>
+    Query 3
+
+  </div></span>
+</div>
