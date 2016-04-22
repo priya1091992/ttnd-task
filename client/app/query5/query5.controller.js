@@ -22,7 +22,6 @@ angular.module('firstSecondApp')
       q5MongoService.getresult({controller:"Query5Ctrl"}).$promise.then(function(res){
         console.log("data received");
         q5.mongoData=res;
-        console.log(q5.mongoData);
       },function(err){
         console.log("error",err);
       })

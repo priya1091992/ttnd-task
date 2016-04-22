@@ -28,6 +28,7 @@ var Order=new Schema({
   orderDetails:[
     {
       productId:{ type: Number},
+      description:{type:String},
       quantity:{type:Number}
     }
   ],

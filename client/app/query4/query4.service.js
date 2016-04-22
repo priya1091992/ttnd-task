@@ -23,7 +23,7 @@ angular.module('firstSecondApp')
         return $resource('/api/mongos/:id/:controller', {
           id: '@_id',controller: '@controller'
         },{
-          getresult:{
+          getresult4:{
             method:"GET",
             isArray:"true",
             params:{}

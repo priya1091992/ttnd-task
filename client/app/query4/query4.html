@@ -20,12 +20,34 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  </span>
+  <span>
+    <div class="col-md-6">
+      <div>MONGO</div>
+      <table class="table table-bordered">
+        <caption>  </caption>
+        <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Product Description</th>
+          <th>Order Date</th>
+          <th>User ID</th>        </tr>
+        </thead>
+        <tbody  ng-repeat="res in q4.mongoData">
+        <span>
+        <tr ng-repeat="r in res.orderDetails">
+          <td>{{r.productId}}</td>
+          <td>{{r.description}}</td>
+          <td>{{res.orderDate}}</td>
+          <td>{{res.userId}}</td>
+        </tr>
+          </span>
+        </tbody>
+      </table>
 
-
-  </div></span>
-  <span><div class="col-md-6">
-    <div>MONGO</div>
-    Query 4
-
-  </div></span>
+    </div>
+  </span>
 </div>
+
+

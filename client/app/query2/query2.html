@@ -1,32 +1,47 @@
 <div class="col-md-12">
   <span><div class="col-md-6 line">
     <div>MYSQL</div>
-    <table class="table table-bordered">
-      <caption>  </caption>
-      <thead>
-      <tr>
-        <th>User ID</th>
-        <th>User Name</th>
-        <th>Address</th>
-        <th>Order ID</th>
-        <th>Product ID</th>
-      </tr>
-      </thead>
-      <tbody  ng-repeat="result in q2.data">
-      <tr>
-        <td>{{result.userId}}</td>
-        <td>{{result.userName}}</td>
-        <td>{{result.address}}</td>
-        <td>{{result.orderId}}</td>
-        <td>{{result.productId}}</td>
-      </tr>
-      </tbody>
-    </table>
+    <h3>User ID</h3>
+    <ul ng-repeat="result in q2.data">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#1{{result.userId}}">{{result.userId}}</a>
+            </h4>
+          </div>
+          <div id="1{{result.userId}}" class="panel-collapse collapse">
+            <div class="panel-body">Name : {{result.userName}}</div>
+            <div class="panel-body">Address : {{result.address}}</div>
+            <div class="panel-body">Email ID: {{result.email}}, {{result.alternateEmail}}</div>
+            <div class="panel-body">Product ID: {{result.productId}}</div>
+            <div class="panel-footer">Data received</div>
+          </div>
+        </div>
+      </div>
+    </ul>
 
   </div></span>
   <span><div class="col-md-6">
     <div>MONGO</div>
-    Query 2
-
+    <h3>User ID</h3>
+    <ul ng-repeat="r in q2.mongoData">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#{{r.userID}}">{{r.userID}}</a>
+            </h4>
+          </div>
+          <div id="{{r.userID}}" class="panel-collapse collapse">
+            <div class="panel-body">Name : {{r.name}}</div>
+            <div class="panel-body">Address : {{r.address}}</div>
+            <div class="panel-body">Email ID: {{r.email[0]}}, {{r.email[1]}}</div>
+            <div class="panel-body">Product ID: {{r.ProductID.productId}}</div>
+            <div class="panel-footer">Data received</div>
+          </div>
+        </div>
+      </div>
+    </ul>
   </div></span>
 </div>
