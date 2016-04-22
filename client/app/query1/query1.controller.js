@@ -4,6 +4,8 @@ angular.module('firstSecondApp')
     $scope.message = 'Hello';
     var q1=this;
     q1.data=[];
+    q1.orderData=[];
+    q1.show=false;
     var refresh=function(){
       q1Service.getdata({controller:"Query1Ctrl"}).$promise.then(function(res){
         console.log("data received");
@@ -11,7 +13,6 @@ angular.module('firstSecondApp')
       },function(err){
         console.log("error",err);
       })
-
     }
 
     var size;
@@ -19,7 +20,7 @@ angular.module('firstSecondApp')
     q1.hasMore=true;
     var limit=10;
     var off =0;
-    //
+
     //q1.pagingFunction=function(){
     //  if(!q1.isLoading && q1.hasMore){
     //    q1.isLoading = true;
@@ -41,19 +42,28 @@ angular.module('firstSecondApp')
     //  }
     //}
 
-   refresh();
+    refresh();
 
     q1.mongoData=[];
     var refresh1=function(){
       q1MongoService.getresult1({controller:"Query1Ctrl"}).$promise.then(function(res){
         console.log("data received");
         q1.mongoData=res;
-        console.log(q1.mongoData);
       },function(err){
         console.log("error",err);
       })
     }
     refresh1();
+
+    q1.UserList=function(user){
+      q1MongoService.getresult1({controller:"Query1Ctrl", user:user}).$promise.then(function(res){
+        console.log("data received",res);
+        q1.orderData=res;
+      },function(err){
+        console.log("error",err);
+      })
+    }
+
 
 
   }]);

@@ -19,7 +19,7 @@ exports.index = function(req, res) {
     case 'Query5Ctrl':
     {
       //Query:5->Get list of Products which have been ordered by User 8 and quantity 4
-      orderItem.aggregate([{$unwind: "$orderDetails"}, {$match: {$and: [{userId: 8}, {'orderDetails.quantity': 4}]}}], function (err, order) {
+      orderItem.aggregate([{$unwind: "$orderDetails"}, {$match: {$and: [{UserId: 8}, {'orderDetails.quantity': 4}]}}], function (err, order) {
         if (err) {
           console.log("Query 5 :", err);
           return handleError(res, err);
@@ -34,7 +34,7 @@ exports.index = function(req, res) {
 
     case 'Query4Ctrl':{
       //Query:4->Get list of Products which have been ordered by User 8 and sort them by order date.
-      orderItem.find({userId: 8}, {_id: 0}, {sort: {orderDate: 1}}, function (err, order) {
+      orderItem.find({UserId: 8}, {_id: 0}, {sort: {orderDate: 1}}, function (err, order) {
         if (err) {
           console.log("Query 4 error", err);
           return handleError(res, err);
@@ -50,7 +50,7 @@ exports.index = function(req, res) {
     case 'Query3Ctrl':
     {
       //Query:3-Get List of Products which have been ordered thrice within last month.
-      orderItem.aggregate([{$unwind: "$orderDetails"}, {$match: {$and: [{'orderDetails.productId': 160}, {'orderDetails.quantity': 6}]}}], function (err, result) {
+      orderItem.aggregate([{$unwind:"$orderDetails"},{$project:{'month':{$month:'$orderDate'},'year':{$year:'$orderDate'},'orderDetails.productId':1, 'orderDate':1,'orderDetails.quantity':1,'UserId':1, 'orderId':1 ,'date':{$dayOfMonth:'$orderDate'}}},{$match: {'month':{$gte:new Date().getMonth(), $lte:new Date().getMonth()},'year':2016}}], function (err, result) {
         if (err) {
           console.log("Query 3 error:", err);
           return handleError(res, err);
@@ -74,10 +74,8 @@ exports.index = function(req, res) {
         }
         else {
           console.log("Query 3 success");
-          console.log(result[0].userId);
           result.forEach(function(e,i){
-            console.log(i,"LLL");
-            userModel.find({'userId':result[i].userId},{},{},function(err,r){
+            userModel.find({'UserId':result[i].UserId},{},{},function(err,r){
               if (err) {
                 console.log("Error in inner query 1:", err);
                 return handleError(r, err);
@@ -86,7 +84,7 @@ exports.index = function(req, res) {
                 console.log("nnn",r)
 
                 var obj={
-                  userID:result[i].userId,
+                  userID:result[i].UserId,
                   name: r[i].name,
                   email:r[i].email,
                   OrderID:result[i].orderId,
@@ -94,7 +92,7 @@ exports.index = function(req, res) {
                   address:r[i].address.building
                 }
                 data=[]
-               data.push(obj);
+                data.push(obj);
                 console.log(data)
                 return res.status(200).json(data);
               }
@@ -110,43 +108,31 @@ exports.index = function(req, res) {
     case 'Query1Ctrl':
     {
       //Query:1->Get User list followed by their order
-      orderItem.find({}, {_id: 0}, {limit: 1000, sort: {UserID: 1}}, function (err, result) {
-        if (err) {
-          console.log("Error in query 1", err);
-        }
+      if(req.query.user){
+        console.log("in iffffffffffffff")
+        orderItem.find({UserId:req.query.user}, {_id: 0}, {limit: 1000, sort: {UserId: 1}}, function (err, result) {
+          if (err) {
+            console.log("Error in query 1", err);
+          }
+          else{
+            console.log(result);
+            console.log("Succeeessssssssssss")
+            return res.status(200).json(result);
 
-        else {
-          result1 = result;
-          userModel.find({}, {_id: 0}, {limit: 1000, sort: {UserId: 1}}, function (err, result) {
-            if (err) {
-              console.log("Error in inner query 1:", err);
-              return handleError(res, err);
-
-            }
-            else {
-              result2 = result;
-              result2.forEach(function (e, i) {
-                var index = _.findIndex(result1, function (o) {
-                  return o.UserID == e.UserId
-                });
-                if (index >= 1) {
-                  var obj = {};
-                  obj = _.merge(e, result1[index]);
-                  arr.push(obj);
-                }
-                else {
-                  obj = {};
-                  obj = e;
-                  arr.push(obj);
-                }
-              })
-              console.log("Query 1 success");
-              //console.log(arr[5].push(result[i].orderId));
-              return res.status(200).json(arr);
-            }
-          })
-        }
-      });
+          }
+        });
+      }
+      else{
+        userModel.find({}, {_id: 0}, {limit: 1000, sort: {UserId: 1}}, function (err, result) {
+          if (err) {
+            console.log("Error in query 1", err);
+          }
+          else {
+            console.log("Query 1 success");
+            return res.status(200).json(result);
+          }
+        });
+      }
     }
       break;
 

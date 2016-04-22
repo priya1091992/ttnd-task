@@ -21,7 +21,6 @@ angular.module('firstSecondApp')
       q3MongoService.getresult3({controller:"Query3Ctrl"}).$promise.then(function(res){
         console.log("data received");
         q3.mongoData=res;
-        console.log(q3.mongoData);
       },function(err){
         console.log("error",err);
       })

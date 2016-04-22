@@ -9,7 +9,6 @@ angular.module('firstSecondApp')
       q2Service.getdata({controller:"Query2Ctrl"}).$promise.then(function(res){
         console.log("data received");
         q2.data=res;
-
       },function(err){
         console.log("error",err);
       })

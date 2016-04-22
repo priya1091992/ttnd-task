@@ -1,16 +1,17 @@
 <div class="col-md-12">
   <span><div class="col-md-6 line">
     <div>MYSQL</div>
-    <h3>User ID</h3>
+    <h3>User List</h3>
     <ul ng-repeat="result in q2.data">
       <div class="panel-group">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" href="#1{{result.userId}}">{{result.userId}}</a>
+              <a data-toggle="collapse" href="#k{{result.userId}}">ID: {{result.userId}}</a>
+              <a data-toggle="collapse" href="#k{{result.userId}}" class="pull-right">Name: {{result.userName}}</a>
             </h4>
           </div>
-          <div id="1{{result.userId}}" class="panel-collapse collapse">
+          <div id="k{{result.userId}}" class="panel-collapse collapse">
             <div class="panel-body">Name : {{result.userName}}</div>
             <div class="panel-body">Address : {{result.address}}</div>
             <div class="panel-body">Email ID: {{result.email}}, {{result.alternateEmail}}</div>
@@ -24,13 +25,14 @@
   </div></span>
   <span><div class="col-md-6">
     <div>MONGO</div>
-    <h3>User ID</h3>
+    <h3>User List</h3>
     <ul ng-repeat="r in q2.mongoData">
       <div class="panel-group">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" href="#{{r.userID}}">{{r.userID}}</a>
+              <a data-toggle="collapse" href="#{{r.userID}}">ID: {{r.userID}}</a>
+              <a data-toggle="collapse" href="#{{r.userID}}" class="pull-right"> Name: {{r.name}}</a>
             </h4>
           </div>
           <div id="{{r.userID}}" class="panel-collapse collapse">

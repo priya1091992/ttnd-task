@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <span>
+    <div class="col-md-6 line">
+      <div>MYSQL</div>
+      <div infinite-scroll="q1.pagingFunction()" infinite-scroll-distance="0" infinite-scroll-disabled="q1.busy"></div>
+      <h3>User List</h3>
+      <ul ng-repeat="result in q1.data">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#k{{result.userId}}">ID: {{result.userId}}</a>
+                <a data-toggle="collapse" href="#k{{result.userId}}" class="pull-right">Name:{{result.userName}}</a>
+              </h4>
+            </div>
+            <div id="k{{result.userId}}" class="panel-collapse collapse">
+              <div class="panel-body">Address : {{result.address}}</div>
+              <div class="panel-body" ng-show="result.orderID">OrderID:  {{result.orderID}}</div>
+              <div class="panel-footer">Data Received</div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </span>
+</div>

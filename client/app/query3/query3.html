@@ -6,7 +6,7 @@
       <tr>
         <th>Product ID</th>
         <th>Quantity</th>
-        <th>OrderId</th>
+        <th>OrderDate</th>
         <th>User ID</th>
       </tr>
       </thead>
@@ -25,7 +25,24 @@
   </div></span>
   <span><div class="col-md-6">
     <div>MONGO</div>
-    Query 3
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>OrderDate</th>
+        <th>User ID</th>
+      </tr>
+      </thead>
+      <tbody  ng-repeat="result in q3.mongoData">
+      <tr>
+        <td>{{result.orderDetails.productId}}</td>
+        <td>{{result.orderDetails.quantity}}</td>
+        <td>{{result.orderDate}}</td>
+        <td>{{result.UserId}}</td>
+      </tr>
+      </tbody>
+    </table>
 
   </div></span>
 </div>

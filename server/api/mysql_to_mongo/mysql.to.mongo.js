@@ -1,22 +1,18 @@
 /**
  * Created by priya on 19/4/16.
  */
-
 exports.value=function(){
-  console.log("HEYY!!")
   var mysql=require('mysql');
   var async=require('async');
   var userModel=require('../mongo/mongo.model').userModel;
   var product=require('../mongo/mongo.model').product;
   var orderItem=require('../mongo/mongo.model').orderItem;
-//var conn=require('../../app')
   var conn=mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'priya',
     database:'ShoppingCart'
   });
-//var mongoose = require('mongoose');
   console.log("KKKK")
   var limit=500;
   var count=0;
@@ -51,7 +47,7 @@ exports.value=function(){
                 var obj = {};
                 a = ret[i];
                 obj = {
-                  'userId': a.userId,
+                  'UserId': a.userId,
                   'name': a.userName,
                   'address': {'building': a.address},
                   'phone': a.phone,
@@ -137,12 +133,11 @@ exports.value=function(){
               obj = {
                 'orderId': ret[i].orderId,
                 'orderDetails': arr1,
-                'userId': ret[i].userId,
+                'UserId': ret[i].userId,
                 'orderDate': d
               }
               userArray.push(obj);
             }
-
             var order = new orderItem();
             order.collection.insert(userArray,function (err,result) {
               if (err) {

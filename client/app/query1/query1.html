@@ -1,33 +1,10 @@
-<div class="col-md-12">
-  <span>
-    <div class="col-md-6 line">
-      <div>MYSQL</div>
-      <div infinite-scroll="q1.pagingFunction()" infinite-scroll-distance="0" infinite-scroll-disabled="q1.busy"></div>
-      <h3>User ID</h3>
-      <ul ng-repeat="result in q1.data">
-        <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" href="#{{result.userId}}">{{result.userId}}</a>
-              </h4>
-            </div>
-            <div id="{{result.userId}}" class="panel-collapse collapse">
-              <div class="panel-body">Name : {{result.userName}}</div>
-              <div class="panel-body">Address : {{result.address}}</div>
-              <div class="panel-body" ng-show="result.orderID">OrderID:  {{result.orderID}}</div>
-              <div class="panel-footer">Panel Footer</div>
-            </div>
-          </div>
-        </div>
-      </ul>
-
-    </div></span>
-  <span><div class="col-md-6">
-    <div>MONGO</div>
-
-
-  </div></span>
+<div>
+  <ul class="nav nav-tabs">
+    <li ><a ui-sref="main.query1.mysql">Mysql</a></li>
+    <li><a ui-sref="main.query1.mongo">MongoDB</a></li>
+  </ul>
+</div>
+<div ui-view>
 </div>
 
 

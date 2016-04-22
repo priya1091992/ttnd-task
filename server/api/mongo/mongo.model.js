@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var User = new Schema({
-    userId : Number,
+    UserId : Number,
     name:String,
     address:{
       building:String
@@ -32,7 +32,7 @@ var Order=new Schema({
       quantity:{type:Number}
     }
   ],
-  userId:{type:Number},
+  UserId:{type:Number},
   orderDate:{type:Date}
 })
 var orderItem=mongoose.model('Order',Order);

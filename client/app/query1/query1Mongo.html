@@ -1,0 +1,27 @@
+<div class="col-md-12">
+  <span>
+  <div class="col-md-6">
+    <div>MONGO</div>
+    <h3>User List</h3>
+    <ul ng-repeat="r in q1.mongoData">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#{{r.UserId}}">ID: {{r.UserId}}</a>
+              <a data-toggle="collapse" href="#{{r.UserId}}"><button class="pull-right" ng-click="q1.UserList(r.UserId)">Order List</button></a>
+            </h4>
+          </div>
+          <div id="{{r.UserId}}" class="panel-collapse collapse">
+            <div class="panel-body">Address : {{r.address.building}}</div>
+            <div class="panel-body">Email ID: {{r.email[0]}}, {{r.email[1]}}</div>
+            <ul ng-repeat="order in q1.orderData">
+              <div class="panel-body">Order ID : {{order.orderId}}</div>
+              <div class="panel-body">Order Date : {{order.orderDate}}</div>
+            </ul>   </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</span>
+</div>

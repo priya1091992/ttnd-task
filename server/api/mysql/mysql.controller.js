@@ -28,7 +28,6 @@ exports.index = function(req, res) {
         }
         else{
           console.log('************Query-5***********:\n');
-          console.log(rows.length);
           return res.status(200).json(rows);
         }
       });
@@ -43,7 +42,6 @@ exports.index = function(req, res) {
         }
         else{
           console.log('************Query-4****************\n');
-          console.log(rows.length);
           return res.status(200).json(rows);
         }
       });
@@ -52,7 +50,7 @@ exports.index = function(req, res) {
 
     case 'Query3Ctrl':{
       //Query:3-Get List of Products which have been ordered thrice within last month.
-      queryString='select *, count(*) as c, date_sub(current_date, interval 1 month) as month from LineItems l, OrderItems o where l.OrderID=o.OrderId group by l.ProductId having c=1 and o.OrderDate>month and o.OrderDate<=current_date order by l.ProductID;';
+      queryString='select * from OrderItems as OI join LineItems as LI on OI.orderId=LI.orderId where OI.orderDate>="2016-03-01 18:15:08" and OI.orderDate<="2016-03-30 18:15:08";';
       con.query(queryString,function(err,rows){
         if(err){
           return handleError(res, err);
@@ -60,7 +58,7 @@ exports.index = function(req, res) {
         }
         else{
           console.log('****************Query-3*********************:\n');
-          console.log(rows.length);}
+        }
         return res.status(200).json(rows);
 
       });
@@ -76,7 +74,6 @@ exports.index = function(req, res) {
         }
         else{
           console.log('*****************Query-2********************\n');
-          console.log(rows.length);
           return res.status(200).json(rows);
 
         }
@@ -89,11 +86,9 @@ exports.index = function(req, res) {
       var values=[off,li];
       con.query(queryString,function(err,rows){
         if(err){
-          console.log("IN error")
           return handleError(res, err);
         }
         else{
-          console.log(rows.length);
           console.log("****************Query-1**********************\n");
           return res.status(200).json(rows);
         }
