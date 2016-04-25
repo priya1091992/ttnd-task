@@ -20,6 +20,7 @@ var conn=mysql.createConnection({
   password:'priya',
   database:'ShoppingCart'
 });
+
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {

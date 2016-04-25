@@ -8,7 +8,9 @@
     <div>
      <button type="button" class="btn btn-primary header-button" ng-click="migrateHome.migration()" ng-disabled="migrateHome.hell" ng-model="migrateHome.hell">Start Migrating Data</button>
       <span ng-show="migrateHome.flagvalue==1"><img src="assets/images/squareloader.gif" width="30px"></span>
-      <span class="header-span" ng-show="migrateHome.reversevalue==1"><p>Migration Completed<span>{{migrateHome.time}}</span></p></span>
+      <span class="header-span" ng-show="(migrateHome.reversevalue==1)"><p>Migration Completed</p></span>
+      <span class="header-span" ng-show="migrateHome.reverse==1"><p>Data Already Migrated</p></span>
+
     </div>
   </div>
 </header>

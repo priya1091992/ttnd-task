@@ -1,19 +1,19 @@
 /**
  * Created by priya on 19/4/16.
  */
+var mysql=require('mysql');
+var async=require('async');
+var userModel=require('../mongo/mongo.model').userModel;
+var product=require('../mongo/mongo.model').product;
+var orderItem=require('../mongo/mongo.model').orderItem;
 exports.value=function(){
-  var mysql=require('mysql');
-  var async=require('async');
-  var userModel=require('../mongo/mongo.model').userModel;
-  var product=require('../mongo/mongo.model').product;
-  var orderItem=require('../mongo/mongo.model').orderItem;
+
   var conn=mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'priya',
     database:'ShoppingCart'
   });
-  console.log("KKKK")
   var limit=500;
   var count=0;
   for(i=0;i<1000;i=i+limit){
@@ -97,7 +97,7 @@ exports.value=function(){
         });
 
       },function(callback){
-        var queryString= 'select o.orderId, o.userId, o.orderDate, l.productId, count(*) as c, group_concat(p.productId) as productInfo, group_concat(quantity) as quant, group_concat(description) as des from OrderItems o join LineItems l on o.orderId=l.orderId join Products p on l.productId=p.productId group by o.orderId limit ?,?';
+        var queryString= 'select o.orderId, o.userId, o.orderDate, l.productId, count(*) as c, group_concat(p.productId) as productInfo, group_concat(quantity) as quant, group_concat(description) as des from OrderItems o Left join LineItems l on o.orderId=l.orderId Left join Products p on l.productId=p.productId group by o.orderId limit ?,?';
         var values=[count,limit];
         userArray=[];
         conn.query(queryString,values, function (error, results) {
@@ -112,6 +112,8 @@ exports.value=function(){
             var resDescription;
             ret = JSON.parse(JSON.stringify(results));
             for(i=0;i<results.length;i++) {
+             if(ret[i].productInfo){
+               console.log(ret[i].productInfo)
               resProduct = ret[i].productInfo.split(",").map(Number);
               resQuantity = ret[i].quant.split(",").map(Number);
               resDescription=ret[i].des.split(",");
@@ -136,6 +138,20 @@ exports.value=function(){
                 'UserId': ret[i].userId,
                 'orderDate': d
               }
+             }
+              else{
+               arr1 = [];
+
+               var obj;
+               var d=new Date(ret[i].orderDate);
+               obj = {
+                 'orderId': ret[i].orderId,
+                 'UserId': ret[i].userId,
+                 'orderDate': d
+               }
+             }
+
+
               userArray.push(obj);
             }
             var order = new orderItem();

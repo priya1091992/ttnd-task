@@ -17,6 +17,7 @@
     "mongoose": "~4.0.3",
     "morgan": "~1.0.0",
     "mysql": "^2.10.2",
+    "phantomjs": "^2.1.7",
     "sequelize": "^3.21.0",
     "serve-favicon": "~2.0.1"
   },

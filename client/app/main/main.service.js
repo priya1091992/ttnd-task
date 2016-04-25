@@ -14,6 +14,18 @@ angular.module('firstSecondApp')
             return deferred.reject(err);
           });
         return deferred.promise;
+      },
+
+      noMigrate : function (obj) {
+        var deferred = $q.defer();
+        $http.get('/api/mongos/:')
+          .success(function (response) {
+            return deferred.resolve(response);
+          })
+          .error(function (err) {
+            return deferred.reject(err);
+          });
+        return deferred.promise;
       }
     }
   }]);

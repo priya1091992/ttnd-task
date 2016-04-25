@@ -52,13 +52,12 @@ function parallelFunction(callback){
           a[0]=(1+i);
           a[1]="alpha"+i;
           a[2]=i+"-block";
-          a[3]=9976573301+i;
+          a[3]=99765733+i;
           a[4]='alpha'+i+'@gmail.com';
           a[5]='alpha'+i+'@gmail.com';
           values.push(a);
           LastValue=a[0];
         }
-
         conn.query(sql,[values], function(err,result){
           if(err){console.log(err);}
           else
@@ -69,8 +68,6 @@ function parallelFunction(callback){
 
           }
         })
-
-
       },
       function(callback1){
         //insert data for Product database
@@ -114,8 +111,6 @@ function insertOrderItem(lastuser, lastproduct, callback){
   function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   }
-
-
   sql="insert into OrderItems(orderId,userId,orderDate) values ?";
   values=[];
   for(i=0;i<1000;i++){
@@ -163,6 +158,4 @@ function insertLineItem(lastproduct,lastorder,callback){
       callback(err,result);
     }
   })
-
-
 }

@@ -7,6 +7,7 @@ var sequelize=new Sequelize('ShoppingCart', 'root', 'priya',{
   }
 });
 
+//User Model
 var usernew=sequelize.define('User',{
     userId:{type:Sequelize.INTEGER, primaryKey:true},
     userName:{type:Sequelize.STRING},
@@ -20,12 +21,12 @@ var usernew=sequelize.define('User',{
   }
 )
 sequelize.sync().then(function(success) {
-
   console.log("Table successfully created");
 }).catch(function(err){
   console.log(err);
 });
 
+//Product Model
 var productnew=sequelize.define('Product',{
     productId:{type:Sequelize.INTEGER, primaryKey:true},
     description:{type:Sequelize.STRING},
@@ -34,7 +35,6 @@ var productnew=sequelize.define('Product',{
   {
     timestamps: false
   }
-
 )
 sequelize.sync().then(function(success) {
   console.log("Table successfully created");
@@ -42,6 +42,7 @@ sequelize.sync().then(function(success) {
   console.log(err);
 });
 
+//OrderItem Model
 var ordernew=sequelize.define('OrderItem',{
     orderId:{type:Sequelize.INTEGER, primaryKey:true},
     orderDate:{type:Sequelize.DATE}
@@ -50,15 +51,14 @@ var ordernew=sequelize.define('OrderItem',{
     timestamps: false
   }
 )
-
 usernew.hasMany(ordernew,{foreignKey: 'userId'});
-
 sequelize.sync().then(function(success) {
   console.log("Table successfully created");
 }).catch(function(err){
   console.log(err);
 });
 
+//LineItem Model
 var linenew=sequelize.define('LineItem',{
     quantity:{type:Sequelize.INTEGER}
   },
@@ -68,7 +68,6 @@ var linenew=sequelize.define('LineItem',{
 )
 ordernew.hasMany(linenew,{foreignKey: 'orderId'},{unique:'abc'});
 productnew.hasMany(linenew,{foreignKey: 'productId'},{unique:'abc'});
-
 sequelize.sync().then(function(success) {
   console.log("Table successfully created");
 }).catch(function(err){

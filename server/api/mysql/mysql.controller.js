@@ -95,7 +95,10 @@ exports.index = function(req, res) {
       });
     }
       break;
-    default: console.log("wrong choice");
+    default: {
+      console.log("wrong choice")
+
+    };
   }
 };
 

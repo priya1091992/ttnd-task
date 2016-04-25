@@ -5,10 +5,8 @@ var userModel=require('./mongo.model').userModel;
 var product=require('./mongo.model').product;
 var orderItem=require('./mongo.model').orderItem;
 var _=require('lodash');
-var result1,result2;
+//var result1,result2;
 var arr=[];
-
-
 exports.index = function(req, res) {
   console.log(req.params);
   console.log(req.query);
@@ -98,10 +96,8 @@ exports.index = function(req, res) {
               }
             })
           });
-
         }
       })
-
     }
       break;
 
@@ -109,16 +105,13 @@ exports.index = function(req, res) {
     {
       //Query:1->Get User list followed by their order
       if(req.query.user){
-        console.log("in iffffffffffffff")
         orderItem.find({UserId:req.query.user}, {_id: 0}, {limit: 1000, sort: {UserId: 1}}, function (err, result) {
           if (err) {
             console.log("Error in query 1", err);
           }
           else{
             console.log(result);
-            console.log("Succeeessssssssssss")
             return res.status(200).json(result);
-
           }
         });
       }
@@ -137,22 +130,19 @@ exports.index = function(req, res) {
       break;
 
     default:{
-      console.log("Wrong request");
+
+      userModel.find({}, {_id: 0}, {limit: 1, sort: {UserId: 1}}, function (err, result) {
+        if (err) {
+          console.log("Error in query 1", err);
+        }
+        else {
+          console.log("Query 1 success");
+          return res.status(200).json(result);
+        }
+      });
     }
   }
 };
-
-// Get a single mongo
-exports.show = function(req, res) {
-  Mongo.findById(req.params.id, function (err, mongo) {
-    if(err) { return handleError(res, err); }
-    if(!mongo) { return res.status(404).send('Not Found'); }
-    return res.json(mongo);
-  });
-};
-
-// Creates a new mongo in the DB.
-
 
 function handleError(res, err) {
   return res.status(500).send(err);
